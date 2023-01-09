@@ -5,6 +5,7 @@ const initMockAPI = async (): Promise<void> => {
   } else {
     const { worker } = await import("./browser");
     // worker.start({ onUnhandledRequest: "bypass" });
+    //
     worker.start();
   }
 };
