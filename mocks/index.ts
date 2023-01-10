@@ -1,3 +1,5 @@
+import { server } from "./server";
+
 const initMockAPI = async (): Promise<void> => {
   if (typeof window === "undefined") {
     const { server } = await import("./server");
@@ -8,6 +10,7 @@ const initMockAPI = async (): Promise<void> => {
     //
     worker.start();
   }
+  // server.close();
 };
 
 export default initMockAPI;

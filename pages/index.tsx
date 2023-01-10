@@ -4,9 +4,7 @@ import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
 import { RecoilSet } from "./recoilSet";
 import { RecoilGet } from "./recoilGet";
-import { worker } from "../mocks/browser";
-import { server } from "../mocks/server";
-
+import { ProductList } from "./productList";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,6 +14,7 @@ export default function Home() {
       <RecoilGet />
       <hr />
       <RecoilSet />
+      <ProductList />
     </>
   );
 }
