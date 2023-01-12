@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "react-query";
 import axios from "axios";
 
-export const getProductList = async () => {
+export const useGetProductList = () => {
   const queryKey = "productList";
 
   const { data, isError, isLoading } = useQuery(
