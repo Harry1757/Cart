@@ -4,14 +4,14 @@ import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
 import { RecoilSet } from "./recoilSet";
 import { RecoilGet } from "./recoilGet";
-import { ProductList } from "./productList";
+import { StoreMainPage } from "./StoreMainPage";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
     <>
-      <ProductList />
+      <StoreMainPage />
     </>
   );
 }

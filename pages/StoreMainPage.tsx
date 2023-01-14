@@ -1,26 +1,24 @@
 import React, { useState } from "react";
-import { useGetProductList } from "../react-query/productList";
 import styled from "@emotion/styled";
 import { UserData } from "./userData";
+import { ProductData } from "./productData";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UploadOutlined,
   UserOutlined,
-  VideoCameraOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, theme, Avatar, Badge } from "antd";
 import { FaTshirt } from "react-icons/fa";
 import { GiArmoredPants } from "react-icons/gi";
+
 const { Header, Sider, Content } = Layout;
 
 const ProductListBackground = styled(Layout)`
-  background-color: pink;
   width: 100%;
   height: 100%;
 
   & .anticon[tabindex]:hover {
-    color: #1890ff;
+    color: #3b3b3b !important;
   }
   & .anticon[tabindex] {
     height: 32px;
@@ -28,6 +26,22 @@ const ProductListBackground = styled(Layout)`
     background: rgba(255, 255, 255, 0.3);
     display: flex;
     align-items: center;
+    color: #8a8a8a !important;
+  }
+  & .ant-layout-sider {
+    background: #3b3b3b !important;
+  }
+  & .ant-menu-inline {
+    background: #3b3b3b !important;
+  }
+  & .ant-menu-item-selected {
+    background-color: #8a8a8a !important;
+  }
+  & .ant-menu-dark {
+    background: #3b3b3b !important;
+  }
+  & .ant-menu-item:not(.ant-menu-item-selected):active {
+    background-color: #8a8a8a !important;
   }
 `;
 
@@ -35,8 +49,7 @@ const WishBucket = styled.div`
   margin: 20px;
 `;
 
-export const ProductList = () => {
-  const { data, isError, isLoading } = useGetProductList();
+export const StoreMainPage = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [tab, SetTab] = useState("1");
   const {
@@ -96,12 +109,12 @@ export const ProductList = () => {
           style={{
             margin: "24px 16px",
             padding: 24,
-            minHeight: 280,
+            minHeight: "100vh",
             background: colorBgContainer,
             color: "pink",
           }}
         >
-          {tab === "1" ? <UserData /> : <>sdfa</>}
+          {tab === "1" ? <UserData /> : <ProductData />}
         </Content>
       </Layout>
     </ProductListBackground>

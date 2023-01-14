@@ -1,5 +1,5 @@
 import React from "react";
-import { useMessageSave } from "../recoil/test";
+import { useMessageSave } from "../recoil/global";
 
 export const RecoilSet = () => {
   const { set } = useMessageSave();
