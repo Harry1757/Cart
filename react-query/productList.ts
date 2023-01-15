@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import axios from "axios";
 
 export const useGetProductList = () => {
@@ -25,5 +25,25 @@ export const useGetUserData = () => {
     data,
     isError,
     isLoading,
+  };
+};
+export const useSaveItem = () => {
+  const queryClient = useQueryClient();
+  const { mutate, isSuccess } = useMutation(
+    async (itemList: any) => {
+      return await axios
+        .post("/user/save/item", { itemList })
+        .then((res) => res.data);
+    },
+    {
+      onSuccess() {
+        queryClient.invalidateQueries(["userData"]);
+      },
+    }
+  );
+
+  return {
+    mutate,
+    isSuccess,
   };
 };

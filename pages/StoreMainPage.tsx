@@ -5,11 +5,12 @@ import { ProductData } from "./productData";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UserOutlined,
+  ShoppingCartOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, theme, Avatar, Badge } from "antd";
 import { FaTshirt } from "react-icons/fa";
 import { GiArmoredPants } from "react-icons/gi";
+import { useGetUserData } from "../react-query/productList";
 
 const { Header, Sider, Content } = Layout;
 
@@ -50,6 +51,8 @@ const WishBucket = styled.div`
 `;
 
 export const StoreMainPage = () => {
+  const userData = useGetUserData();
+
   const [collapsed, setCollapsed] = useState(false);
   const [tab, SetTab] = useState("1");
   const {
@@ -59,6 +62,7 @@ export const StoreMainPage = () => {
   const handleClickMenu = (e: any) => {
     SetTab(e.key);
   };
+
   return (
     <ProductListBackground>
       <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -100,8 +104,8 @@ export const StoreMainPage = () => {
             }
           )}
           <WishBucket>
-            <Badge count={1}>
-              <Avatar shape="square" icon={<UserOutlined />} />
+            <Badge count={userData.data?.bucketList.length}>
+              <Avatar shape="square" icon={<ShoppingCartOutlined />} />
             </Badge>
           </WishBucket>
         </Header>
