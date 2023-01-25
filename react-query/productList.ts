@@ -1,11 +1,25 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import axios from "axios";
 
-export const useGetProductList = () => {
-  const queryKey = "productList";
+export const useGetTopList = () => {
+  const queryKey = "top";
 
   const { data, isError, isLoading } = useQuery([queryKey], async () => {
-    return await axios.get("/productList").then((res) => res.data);
+    return await axios.get("/TopList").then((res) => res.data);
+  });
+
+  return {
+    data,
+    isError,
+    isLoading,
+  };
+};
+
+export const useGetBottomList = () => {
+  const queryKey = "bottom";
+
+  const { data, isError, isLoading } = useQuery([queryKey], async () => {
+    return await axios.get("/BottomList").then((res) => res.data);
   });
 
   return {

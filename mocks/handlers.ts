@@ -9,7 +9,63 @@ const UserData = {
 
 export const handlers = [
   // Handles a GET /user request
-  rest.get("/productList", (req, res, ctx) => {
+  rest.get("/TopList", (req, res, ctx) => {
+    return res(
+      ctx.json([
+        {
+          id: 6,
+          brand: "수아레",
+          name: "워셔블 하찌 니트 - 11 COLOR",
+          originPrice: 59000,
+          price: 39900,
+          rate: "5",
+          gaveRatePeople: 17327,
+          url: "https://image.msscdn.net/images/goods_img/20220303/2396645/2396645_4_500.jpg?t=20220930095511",
+        },
+        {
+          id: 7,
+          brand: "키뮤어",
+          name: "코튼 워셔블 하찌 하프집업 니트_5 COLOR",
+          originPrice: 69000,
+          price: 56900,
+          rate: "5",
+          gaveRatePeople: 10651,
+          url: "https://image.msscdn.net/images/goods_img/20220807/2702396/2702396_16734042163511_500.jpg?t=20230111113020",
+        },
+        {
+          id: 8,
+          brand: "수아레",
+          name: "[리뉴얼] 하프 터틀넥 니트 세트",
+          originPrice: 66000,
+          price: 39900,
+          rate: "4",
+          gaveRatePeople: 25088,
+          url: "https://image.msscdn.net/images/goods_img/20200821/1558847/1558847_13_500.jpg?t=20221012135738",
+        },
+        {
+          id: 9,
+          brand: "이에스엔",
+          name: "[세트] 하프 폴라 니트 티셔츠",
+          originPrice: 78000,
+          price: 35100,
+          rate: "4",
+          gaveRatePeople: 60221,
+          url: "https://image.msscdn.net/images/goods_img/20171025/659554/659554_6_500.jpg?t=20220901142614",
+        },
+        {
+          id: 10,
+          brand: "드로우핏",
+          name: "[드로우핏X깡스타일리스트] 터틀넥 니트 티셔츠",
+          originPrice: 60000,
+          price: 43900,
+          rate: "5",
+          gaveRatePeople: 13390,
+          url: "https://image.msscdn.net/images/goods_img/20210917/2139144/2139144_5_500.jpg?t=20220902141532",
+        },
+      ])
+    );
+  }),
+  rest.get("/BottomList", (req, res, ctx) => {
     return res(
       ctx.json([
         {

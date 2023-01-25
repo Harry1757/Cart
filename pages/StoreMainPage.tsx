@@ -10,7 +10,11 @@ import {
 import { Layout, Menu, theme, Avatar, Badge } from "antd";
 import { FaTshirt } from "react-icons/fa";
 import { GiArmoredPants } from "react-icons/gi";
-import { useGetUserData } from "../react-query/productList";
+import {
+  useGetUserData,
+  useGetTopList,
+  useGetBottomList,
+} from "../react-query/productList";
 
 const { Header, Sider, Content } = Layout;
 
@@ -52,7 +56,8 @@ const WishBucket = styled.div`
 
 export const StoreMainPage = () => {
   const userData = useGetUserData();
-
+  const bottomData = useGetBottomList();
+  const topData = useGetTopList();
   const [collapsed, setCollapsed] = useState(false);
   const [tab, SetTab] = useState("1");
   const {
@@ -118,7 +123,11 @@ export const StoreMainPage = () => {
             color: "pink",
           }}
         >
-          {tab === "1" ? <UserData /> : <ProductData />}
+          {tab === "1" ? (
+            <ProductData productList={topData} />
+          ) : (
+            <ProductData productList={bottomData} />
+          )}
         </Content>
       </Layout>
     </ProductListBackground>

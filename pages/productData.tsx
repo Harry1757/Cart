@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
-  useGetProductList,
+  useGetBottomList,
   useGetUserData,
   useSaveItem,
 } from "../react-query/productList";
@@ -31,10 +31,10 @@ const ProductListStyle = styled.div`
 const RateStyle = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
+  justify-content: space-between;
   & .gaveRatePeople {
     color: #fadb13;
-    font-size: 12px;
+    font-size: 6px;
   }
 `;
 const PriceAndSizeStyle = styled.div`
@@ -54,6 +54,7 @@ const BrandAndNameStyle = styled.div`
   }
   .productName {
     overflow: scroll;
+    scroll-behavior: smooth;
     font-size: 13px;
   }
 `;
@@ -218,12 +219,12 @@ const Grade = ({ price, userData }: { price: number; userData: any }) => {
   );
 };
 
-export const ProductData = () => {
+export const ProductData = ({ productList }: { productList: any }) => {
   const [reset, setReset] = useState<boolean>(false);
   const [saveListUser, setSaveListUser] = useState<Option[]>([]);
-  const productList = useGetProductList();
   const userData = useGetUserData();
   const { mutate } = useSaveItem();
+  const productNametest = useRef<any>([]);
 
   const confirm = () => {
     setReset(!reset);
@@ -239,6 +240,25 @@ export const ProductData = () => {
     setReset(!reset);
   };
 
+  const handleHoverProductName = (index: number) => {
+    // let setData = 0;
+    const maxScrollWidth = productNametest?.current[index]?.scrollWidth;
+    productNametest?.current[index]?.scrollTo(maxScrollWidth, 0);
+
+    // while (maxScrollWidth !== setData) {
+    //   console.log(setData);
+    //   if (setData + 1 > maxScrollWidth) {
+    //     setData = maxScrollWidth;
+    //   } else {
+    //     setData = setData + 1;
+    //   }
+    //   productNametest?.current[index]?.scrollTo(setData, 0);
+    // }
+  };
+  const handleremoveProductNameEvent = (index: number) => {
+    productNametest?.current[index]?.scrollTo(0, 0);
+  };
+
   return (
     <ProductListStyle>
       {!productList.isLoading ? (
@@ -246,7 +266,7 @@ export const ProductData = () => {
           <Card
             key={index}
             hoverable
-            style={{ width: 200, height: 350, position: "relative" }}
+            style={{ width: 170, height: 350, position: "relative" }}
             cover={
               <Image
                 src={productData.url}
@@ -260,7 +280,16 @@ export const ProductData = () => {
               title={
                 <BrandAndNameStyle>
                   <div className="brand">{productData.brand}</div>
-                  <div className="productName">{productData.name}</div>
+                  <div
+                    className="productName"
+                    onMouseOver={() => handleHoverProductName(index)}
+                    onMouseLeave={() => handleremoveProductNameEvent(index)}
+                    ref={(element) =>
+                      (productNametest.current[index] = element)
+                    }
+                  >
+                    {productData.name}
+                  </div>
                 </BrandAndNameStyle>
               }
               description={
@@ -286,7 +315,7 @@ export const ProductData = () => {
                     <Rate
                       disabled
                       defaultValue={productData.rate}
-                      style={{ fontSize: 10 }}
+                      style={{ fontSize: 8 }}
                     />
                     <div className="gaveRatePeople">
                       {productData.gaveRatePeople.toLocaleString("ko-KR")}
