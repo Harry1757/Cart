@@ -240,22 +240,25 @@ export const ProductData = ({ productList }: { productList: any }) => {
     setReset(!reset);
   };
 
-  const handleHoverProductName = (index: number) => {
-    // let setData = 0;
-    const maxScrollWidth = productNametest?.current[index]?.scrollWidth;
-    productNametest?.current[index]?.scrollTo(maxScrollWidth, 0);
-
-    // while (maxScrollWidth !== setData) {
-    //   console.log(setData);
-    //   if (setData + 1 > maxScrollWidth) {
-    //     setData = maxScrollWidth;
-    //   } else {
-    //     setData = setData + 1;
-    //   }
-    //   productNametest?.current[index]?.scrollTo(setData, 0);
-    // }
+  const test = (index: string, start: any) => {
+    let nowTime = new Date().getTime();
+    if (nowTime - 1500 > start) {
+      productNametest?.current[index]?.scrollTo(0, 0);
+    } else {
+      productNametest?.current[index]?.scrollTo(
+        productNametest?.current[index]?.scrollWidth,
+        0
+      );
+      requestAnimationFrame(() => test(index, start));
+    }
   };
-  const handleremoveProductNameEvent = (index: number) => {
+
+  const handleHoverProductName = (index: string) => {
+    let startTime = new Date().getTime();
+    requestAnimationFrame(() => test(index, startTime));
+  };
+
+  const handleremoveProductNameEvent = (index: string) => {
     productNametest?.current[index]?.scrollTo(0, 0);
   };
 
